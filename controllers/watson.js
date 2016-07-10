@@ -11,16 +11,20 @@ router.get("/", function(req, res){
   console.log("==================================")
   console.log("this is not an actual API call")
   console.log("===================================")
-  //loop through the tones, push them into an array. sort the array and grab the first and last values.
-  console.log(response.document_tone.tone_categories[0].tones[0].tone_name)           //well this is certainly a lot to deal with LOL. need the first and the last tone_name.
-  data = response.document_tone.tone_categories[0].tones[0].tone_name
-  res.send(data);
-  // tone_analyzer.tone({ text: 'A word is dead when it is said, some say. Emily Dickinson' }, function(err, tone) {
-  //   if (err)
-  //     console.log(err);
-  //   else
-  //     console.log(JSON.stringify(tone, null, 2));
-  // });
+  var feelings = response.document_tone.tone_categories[0].tones
+  // console.log(feelings)
+  feelings.sort(function(obj1, obj2){
+    return obj2.score - obj1.score
+  })
+
+  // console.log(feelings)
+  // console.log(feelings[0].tone_name)
+  // console.log(feelings[4].tone_name)
+  data = {
+    greatest: feelings[0].tone_name,
+    least: feelings[4].tone_name
+  }
+  res.send(data)
 })
 
 //===========

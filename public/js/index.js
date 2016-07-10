@@ -80,6 +80,8 @@ var Watson = React.createClass({
         </form> 
       </div>
       )
+    }else{
+
     }
   }
 })
@@ -100,7 +102,7 @@ var Facts = React.createClass({
       url: "/facts",
       method: "GET",
       success: function(data){
-        console.log(data);
+        // console.log(data);
         // console.log(this.props.setState);
         // console.log(this.props.factsState);
         this.props.setState(data)
@@ -135,7 +137,7 @@ var Quotes = React.createClass({
       url: "/quotes",
       method: "GET",
       success: function(data){
-        console.log(data);
+        // console.log(data);
         // console.log(this.props.setState);
         // console.log(this.props.factsState);
         this.props.setState(data)

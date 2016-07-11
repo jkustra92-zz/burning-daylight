@@ -98,12 +98,46 @@ var Watson = React.createClass({
 })
 
 var Spotify = React.createClass({
+  spotifyAjax: function(){
+     $.ajax({
+      url: "/music",
+      method: "GET",
+      // data: {} whatever the value of the button is, i guess?
+      success: function(data){
+        this.props.setState(data)
+      }.bind(this)
+    })
+  },
   render: function(){
-    return (
+    if (this.props.spotifyState == undefined){
+       return (
       <div>
-        <p>{this.props.watsonState.most}</p>
-        <p>{this.props.watsonState.least}</p>
-      </div>
+        <button
+        value = {this.props.watsonState.most}
+        onClick = {this.spotifyAjax}
+        >
+          {this.props.watsonState.most}
+        </button>
+        <button
+          value = {this.props.watsonState.most}
+          onClick = {this.spotifyAjax}
+        >
+          {this.props.watsonState.least}
+        </button>
+      </div>)
+     }else{
+       <SpotifyPlayer 
+          iframe = "iframe" 
+          src = "https://embed.spotify.com/?uri=" + {this.props.spotifyState}
+        />
+     }
+   }
+ })
+var SpotifyPlayer = React.createClass({
+  render: function(){
+    var Iframe = this.props.iframe;
+    return (
+      <div> womp </div>
     )
   }
 })
@@ -179,6 +213,6 @@ var Quotes = React.createClass({
       </div>)
     }
   }
-})
+});
 
 ReactDOM.render(<App />, document.getElementById("main-container"));

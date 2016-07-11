@@ -98,11 +98,12 @@ var Watson = React.createClass({
 })
 
 var Spotify = React.createClass({
-  spotifyAjax: function(){
+  spotifyAjax: function(e){
+     console.log(e.target.value)
      $.ajax({
       url: "/music",
       method: "GET",
-      // data: {} whatever the value of the button is, i guess?
+      data: {keyword: e.target.value},
       success: function(data){
         this.props.setState(data)
       }.bind(this)
@@ -126,12 +127,11 @@ var Spotify = React.createClass({
         </button>
       </div>)
      }else{
-       <SpotifyPlayer 
-          iframe = "iframe" 
-          src = "https://embed.spotify.com/?uri=" + {this.props.spotifyState}
+      return( 
+        <SpotifyPlayer 
         />
-     }
-   }
+     )}
+    }
  })
 var SpotifyPlayer = React.createClass({
   render: function(){

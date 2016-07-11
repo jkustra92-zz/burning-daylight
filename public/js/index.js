@@ -142,7 +142,7 @@ var SpotifyPlayer = React.createClass({
     var Iframe = this.props.iframe;
     return (
       <div>
-        <Iframe src={this.props.src}/>
+        <Iframe src={this.props.src} width = "300" height = "380" frameBorder = "0" allowTransparency = "0"/>
       </div>
     )
   }

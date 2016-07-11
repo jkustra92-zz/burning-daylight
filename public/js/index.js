@@ -1,3 +1,7 @@
+console.log("hello, friend. hello, friend? that's lame.");
+//have to start every app off with this mr. robot reference. it's just my thing.
+
+
 var App = React.createClass({
   getInitialState: function(){
     return {
@@ -22,14 +26,11 @@ var App = React.createClass({
   render: function(){
     return(
       <div id = "other-container">
-        <Facts 
-          factsState = {this.state.facts}
-          setState = {this.setFactsState}
-        />
-        <Quotes 
-          quotesState = {this.state.quotes}
-          setState = {this.setQuotesState}/>
-      </div>
+      <Watson 
+        watsonState = {this.state.watson} 
+        setState = {this.setWatsonState}
+      />
+     </div>
     )
   }
 });

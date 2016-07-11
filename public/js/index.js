@@ -105,6 +105,7 @@ var Spotify = React.createClass({
       method: "GET",
       data: {keyword: e.target.value},
       success: function(data){
+        console.log(data)
         this.props.setState(data)
       }.bind(this)
     })
@@ -120,7 +121,7 @@ var Spotify = React.createClass({
           {this.props.watsonState.most}
         </button>
         <button
-          value = {this.props.watsonState.most}
+          value = {this.props.watsonState.least}
           onClick = {this.spotifyAjax}
         >
           {this.props.watsonState.least}
@@ -129,15 +130,20 @@ var Spotify = React.createClass({
      }else{
       return( 
         <SpotifyPlayer 
+          iframe = "iframe" 
+          src = {this.props.spotifyState}
         />
      )}
     }
  })
 var SpotifyPlayer = React.createClass({
   render: function(){
+    console.log(this.props.src)
     var Iframe = this.props.iframe;
     return (
-      <div> womp </div>
+      <div>
+        <Iframe src={this.props.src}/>
+      </div>
     )
   }
 })

@@ -8,6 +8,7 @@ router = express.Router();
 //tone analyzer data goes here when i eventually deploy this
 
 router.get("/", function(req, res){
+  console.log(req.query.text)
   console.log("==================================")
   console.log("this is not an actual API call")
   console.log("===================================")
@@ -20,10 +21,46 @@ router.get("/", function(req, res){
   // console.log(feelings)
   // console.log(feelings[0].tone_name)
   // console.log(feelings[4].tone_name)
-  data = {
-    greatest: feelings[0].tone_name,
-    least: feelings[4].tone_name
-  }
+  var emotion = feelings[0].tone_name
+  var data;
+  switch(emotion){
+    case "Anger":
+      data = {
+        most: "anger",
+        least: "motivation"
+      };
+    break;
+    case "Disgust":
+      data = {
+        most: "dark",
+        least: "energetic"
+      };
+    break;
+    case "Fear":
+      data = {
+        most: "fear",
+        least: "courage"
+      };
+    case "Joy":
+      data = {
+        most: "joy",
+        least: "whimsical"
+      }
+    break;
+
+    case "Sadness":
+      data = {
+        most: "depressed",
+        least: "excited"
+      }
+    break;
+
+    default:
+      data = {
+        most: "happy",
+        least: "sad"
+      }
+    }
   res.send(data)
 })
 

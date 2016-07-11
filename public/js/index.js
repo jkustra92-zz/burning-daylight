@@ -5,10 +5,10 @@ console.log("hello, friend. hello, friend? that's lame.");
 var App = React.createClass({
   getInitialState: function(){
     return {
-      watson: null,
-      spotify: null,
-      facts: null,
-      quotes: null
+      watson: undefined,
+      spotify: undefined,
+      facts: undefined,
+      quotes: undefined
     }
   },
   setWatsonState: function (data){
@@ -29,6 +29,8 @@ var App = React.createClass({
       <Watson 
         watsonState = {this.state.watson} 
         setState = {this.setWatsonState}
+        spotifyState = {this.state.spotify}
+        setSpotifyState = {this.setSpotifyState}
       />
      </div>
     )
@@ -38,7 +40,7 @@ var App = React.createClass({
 var Watson = React.createClass({
   getInitialState: function(){
     return{
-      userText: null
+      userText: undefined
     }
   },
   handleTextChange: function(e) {
@@ -49,17 +51,19 @@ var Watson = React.createClass({
   },
   watsonAjax: function(e){
     e.preventDefault();
+    var textData = {text: this.state.userText}
+    console.log(textData)
    $.ajax({
       url: "/watson/",
       method: "GET",
-      // data: whatever the form data is,
+      data: textData,
       success: function(data) {
-        console.log(data)
+        this.props.setState(data);
       }.bind(this)
     })
   },
   render: function(){
-    if (this.props.watsonState == null){
+    if (this.props.watsonState == undefined){
       return (
         <div>
           <form
@@ -82,14 +86,25 @@ var Watson = React.createClass({
       </div>
       )
     }else{
-
+      return(
+        <Spotify
+          watsonState = {this.props.watsonState}
+          spotifyState = {this.props.spotifyState}
+          setState = {this.props.setSpotifyState}
+        />
+      )
     }
   }
 })
 
 var Spotify = React.createClass({
   render: function(){
-    return (<div><p>music af</p></div>)
+    return (
+      <div>
+        <p>{this.props.watsonState.most}</p>
+        <p>{this.props.watsonState.least}</p>
+      </div>
+    )
   }
 })
 
@@ -113,7 +128,7 @@ var Facts = React.createClass({
   render: function(){
     var catFact = this.props.factsState;
     <h2> cat facts! </h2>
-    if (this.props.factsState == null){
+    if (this.props.factsState == undefined){
       return (<div><p>ya ain't got no cat facts</p></div>)
     }else{
       return (
@@ -148,7 +163,7 @@ var Quotes = React.createClass({
   render: function(){
     var quote = this.props.quoteState;
     <h2> become inspired or something</h2>
-    if (this.props.quotesState == null){
+    if (this.props.quotesState == undefined){
       return (<div><p>not inspirational af. boo.</p></div>)
     }else{
       quote = this.props.quotesState;

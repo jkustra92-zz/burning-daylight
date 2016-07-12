@@ -175,12 +175,13 @@ var Facts = React.createClass({
   },
   render: function(){
     var catFact = this.props.factsState;
-    <h2> cat facts! </h2>
+    
     if (this.props.factsState == undefined){
       return (<div><p>ya ain't got no cat facts</p></div>)
     }else{
       return (
       <div id = "catfact-container">
+      <h2> cat facts! </h2>
         <p>{catFact}</p>
       <button
         onClick = {this.getFact}
@@ -210,15 +211,16 @@ var Quotes = React.createClass({
   },
   render: function(){
     var quote = this.props.quoteState;
-    <h2> become inspired or something</h2>
+    
     if (this.props.quotesState == undefined){
       return (<div><p>not inspirational af. boo.</p></div>)
     }else{
       quote = this.props.quotesState;
       return (
       <div id = "quote-container">
-        <p>{quote.text}</p>
-        <p>{quote.author}</p>
+      <h2> become inspired or something</h2>
+        <p>"{quote.text}"</p>
+        <p>-{quote.author}</p>
       <button
         onClick = {this.getQuote}
       > 

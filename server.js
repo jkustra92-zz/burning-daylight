@@ -28,6 +28,9 @@ app.use(methodOverride(function(req, res){
 // controllers
 //=============
 
+var appController = require("./controllers/app.js")
+app.use("/app", appController);
+
 var watsonController = require("./controllers/watson.js")
 app.use("/watson", watsonController);
 

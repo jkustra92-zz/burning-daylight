@@ -12,10 +12,9 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "giphy": "0.0.4",
     "method-override": "^2.3.6",
     "morgan": "^1.7.0",
-    "react-frame-component": "^0.6.1",
-    "react-iframe": "0.0.4",
     "request": "^2.72.0",
     "spotify-web-api-node": "^2.3.2",
     "watson-developer-cloud": "^1.12.0",

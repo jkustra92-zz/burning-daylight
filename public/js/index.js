@@ -32,7 +32,8 @@ var App = React.createClass({
   },
   render: function(){
     return(
-      <div id = "other-container">
+    <div id = "big-container">
+      <div id = "container-left">   
       <Watson 
         watsonState = {this.state.watson} 
         setState = {this.setWatsonState}
@@ -40,19 +41,19 @@ var App = React.createClass({
         setSpotifyState = {this.setSpotifyState}
         reset = {this.resetWatsonState}
       />
-      <Facts 
-        factsState = {this.state.facts}
-        setState = {this.setFactsState}
-      />
-      <Quotes 
-        quotesState = {this.state.quotes}
-        setState = {this.setQuotesState}
-      />
-      <Gifs 
-        gifState = {this.state.gif}
-        setState = {this.setGiphyState}
-      />
+      </div>
+
+      <div id = "container-right"> 
+        <Quotes 
+          quotesState = {this.state.quotes}
+          setState = {this.setQuotesState}
+        />
+        <Gifs 
+          gifState = {this.state.gif}
+          setState = {this.setGiphyState}
+        /> 
      </div>
+    </div>
     )
   }
 });
@@ -292,6 +293,7 @@ var Gifs = React.createClass({
         > 
         E
       </button>
+      <br />
       <img src = {gif.data.image_url} />
       <br />
       

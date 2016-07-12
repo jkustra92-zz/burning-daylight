@@ -28,9 +28,6 @@ app.use(methodOverride(function(req, res){
 // controllers
 //=============
 
-var appController = require("./controllers/app.js")
-app.use("/app", appController);
-
 var watsonController = require("./controllers/watson.js")
 app.use("/watson", watsonController);
 
@@ -42,6 +39,9 @@ app.use("/quotes", quotesController);
 
 var factsController = require("./controllers/facts.js")
 app.use("/facts", factsController);
+
+var giphyController = require("./controllers/giphy.js")
+app.use("/giphy", giphyController);
 
 //========
 // static

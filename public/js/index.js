@@ -8,7 +8,8 @@ var App = React.createClass({
       watson: undefined,
       spotify: undefined,
       facts: undefined,
-      quotes: undefined
+      quotes: undefined,
+      gif: undefined
     }
   },
   setWatsonState: function (data){
@@ -22,6 +23,9 @@ var App = React.createClass({
   },
   setQuotesState: function(data){
     this.setState({quotes: data})
+  },
+  setGiphyState: function(data){
+    this.setState({gif: data})
   },
   render: function(){
     return(
@@ -39,6 +43,10 @@ var App = React.createClass({
       <Quotes 
         quotesState = {this.state.quotes}
         setState = {this.setQuotesState}
+      />
+      <Gifs 
+        gifState = {this.state.gif}
+        setState = {this.setGiphyState}
       />
      </div>
     )
@@ -230,5 +238,38 @@ var Quotes = React.createClass({
     }
   }
 });
+
+var Gifs = React.createClass({
+  componentDidMount: function(){
+    this.getGif()
+  },
+  getGif: function(){
+    $.ajax({
+      url: "/giphy",
+      method: "GET",
+      success: function(data){
+        this.props.setState(data)
+      }.bind(this)
+    })
+  },
+  render: function(){
+    if (this.props.gifState == undefined) {
+      return(<div><p>no gifs. none.</p></div>)
+    }else{
+      var gif = this.props.gifState;
+      return (
+      <div id = "gif-container">
+      <h2>you get a gif! and YOU get a gif!!!</h2>
+      <img src = {gif.data.image_url} />
+      <br />
+      <button
+        onClick = {this.getGif}
+      > 
+        ANOTHER.
+      </button>
+      </div>)
+    }
+  }
+})
 
 ReactDOM.render(<App />, document.getElementById("main-container"));

@@ -32,6 +32,14 @@ var App = React.createClass({
         spotifyState = {this.state.spotify}
         setSpotifyState = {this.setSpotifyState}
       />
+      <Facts 
+        factsState = {this.state.facts}
+        setState = {this.setFactsState}
+      />
+      <Quotes 
+        quotesState = {this.state.quotes}
+        setState = {this.setQuotesState}
+      />
      </div>
     )
   }

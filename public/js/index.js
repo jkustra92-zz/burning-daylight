@@ -13,7 +13,7 @@ var App = React.createClass({
     }
   },
   resetWatsonState: function(){
-    this.setState({watson: undefined})
+    this.setState({watson: undefined, spotify: undefined})
   },
   setWatsonState: function (data){
     this.setState({watson: data})
@@ -136,6 +136,7 @@ var Spotify = React.createClass({
     if (this.props.spotifyState == undefined){
        return (
       <div id = "button-holder">
+        <h2 id = "watson-title"> music for your mood </h2>
         <p id = "watson-description"> below is how you feel and the opposite of that! 
         what kind of music would you like to hear? </p>
         <button
@@ -152,6 +153,8 @@ var Spotify = React.createClass({
         >
           {this.props.watsonState.least}
         </button>
+        <br />
+        <span id = "music-note">D</span>
       </div>)
      }else{
       return( 
@@ -171,7 +174,8 @@ var SpotifyPlayer = React.createClass({
     console.log(this.props.src)
     var Iframe = this.props.iframe;
     return (
-      <div>
+      <div id = "spotify-component">
+        <h2 id = "watson-title"> music for your mood </h2>
         <Iframe id = "spotify-player" src={this.props.src} width = "300" height = "380" frameBorder = "0" allowTransparency = "0"/>
         <br />
         <button
@@ -204,19 +208,19 @@ var Facts = React.createClass({
   },
   render: function(){
     var catFact = this.props.factsState;
-    
     if (this.props.factsState == undefined){
       return (<div><p>ya ain't got no cat facts</p></div>)
     }else{
       return (
       <div id = "catfact-container">
-      <h2> cat facts! </h2>
-        <p>{catFact}</p>
+      <h2 id = "cat-title"> cat facts! </h2>
       <button
+        id = "cat-button"
         onClick = {this.getFact}
       > 
-        get more cat facts! 
+        A
       </button>
+      <p id = "catfact">{catFact}</p>
       </div>)
     }
   }
@@ -247,14 +251,15 @@ var Quotes = React.createClass({
       quote = this.props.quotesState;
       return (
       <div id = "quote-container">
-      <h2> become inspired or something</h2>
-        <p>"{quote.text}"</p>
-        <p>-{quote.author}</p>
-      <button
-        onClick = {this.getQuote}
-      > 
-        get more inspiration! 
-      </button>
+        <h2 id = "quote-title"> become inspired</h2>
+        <button
+          id = "quote-button"
+          onClick = {this.getQuote}
+        > 
+          B C
+        </button>
+        <p id = "quote-text">"{quote.text}"</p>
+        <p id = "quote-author">-{quote.author}</p>
       </div>)
     }
   }
@@ -280,14 +285,16 @@ var Gifs = React.createClass({
       var gif = this.props.gifState;
       return (
       <div id = "gif-container">
-      <h2>you get a gif! and YOU get a gif!!!</h2>
+      <h2 id = "gif-title">emergency animal gifs!</h2>
+      <button
+        id = "gif-button"
+        onClick = {this.getGif}
+        > 
+        E
+      </button>
       <img src = {gif.data.image_url} />
       <br />
-      <button
-        onClick = {this.getGif}
-      > 
-        ANOTHER.
-      </button>
+      
       </div>)
     }
   }

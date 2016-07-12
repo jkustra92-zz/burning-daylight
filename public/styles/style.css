@@ -17,11 +17,16 @@ body {
   text-align: center;
 }
 
+@font-face {
+  font-family: 'fontello';
+  src: url('../fonts/fontello.ttf');
+}
+
 /*WATSON COMPONENT*/
 
 .user-input {
   width: 300px;
-  height: 350px;
+  height: 380px;
   resize: none;
   font-size: 20px;
   font-family: 'Lato', sans-serif;
@@ -35,14 +40,6 @@ body {
   color: #015255; 
 }
 
-/*SPOTIFY COMPONENT*/
-
-#button-holder {
-  text-align: center;
-  height: 350px;
-  display: inline-block;
-}
-
 .watson-button {
   background-color: #ebce7d;
   border: 5px solid #2a282b;
@@ -50,8 +47,8 @@ body {
   box-shadow: 0 20px 20px -15px #040203;
   color: #82c3c7;
   display: block;
-  width: 200px;
-  height: 55px;
+  width: 300px;
+  height: 75px;
   margin: 50px auto;
   text-align: center;
   font-size: 2em;
@@ -70,6 +67,21 @@ body {
   color: #ebce7d;
 }
 
+/*SPOTIFY COMPONENT*/
+
+#button-holder {
+  text-align: center;
+  height: 536.55px;
+  width: 384px;
+  display: inline-block;
+}
+
+#music-note {
+  font-family: "fontello";
+  color: #015255;
+  font-size: 100px;
+}
+
 #watson-description {
   text-align: center;
   font-family: 'Inconsolata';
@@ -80,23 +92,111 @@ body {
   width: 100%;
 }
 
+#spotify-component {
+  height: 536.55px;
+  width: 384px;
+}
+
 /*FACT COMPONENT*/
+
+#catfact-container {
+  height: 30em;
+}
+
+#cat-title {
+  font-family: 'Shadows Into Light Two', cursive;
+  font-size: 4em;
+  color: #ff4c2d;
+  margin: 0;
+}
+
+#cat-button {
+  background-color: #82c3c7;
+  color: #c61800;
+  font-family: "fontello";
+  width: 75px;
+  height: 75px;
+  font-size: 2em;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #ebce7d;
+  transition: 1s;
+  box-shadow: 0 20px 20px -15px #040203;
+}
+
+#cat-button:hover {
+  background-color: #c61800;
+  color: #ebce7d;
+  border: 2px solid #82c3c7;
+  transition: 1s;
+}
+
+#catfact {
+  font-family: 'Lato', sans-serif;
+  color: #2a282b;
+  font-size: 1.5rem;
+}
 
 /*QUOTE COMPONENT*/
 
+#quote-container {
+  height: 20em;
+}
+
+#quote-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 4.5em;
+  color: #ec4d49;
+  margin: 0;
+}
+
+#quote-button {
+  font-family: "fontello"
+}
+
+#quote-text {
+  font-family: 'Great Vibes', cursive;  
+  color: #2a282b;
+  font-size: 2em;
+}
+
+#quote-author {
+  font-family: 'Lato', sans-serif;
+  color: #ec4d49;
+}
+
 /*GIF COMPONENT*/
+
+#gif-container {
+  height: 20em;
+}
+
+#gif-title {
+  font-family: 'Fjalla One', sans-serif;
+  color: #6d016c;
+  font-size: 3em;
+}
+
+#gif-button {
+  font-family: "fontello"
+}
+
 img {
   width: 400px;
   height: 250px;
 }
-
-
 
 @media (min-width: 700px) {
   #spotify-player {
     width: 25%;
   }
 
+  #spotify-component {
+    width: 100%;
+  }
+  #button-container {
+    width: 100%;
+  }
   .watson-button {
     display: inline-block;
     margin: 1em;

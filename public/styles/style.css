@@ -1,4 +1,104 @@
+/*IMPORTING FONTS*/
+
+
+@import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700);
+@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two);
+@import url(https://fonts.googleapis.com/css?family=Great+Vibes);
+@import url(https://fonts.googleapis.com/css?family=Fjalla+One);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+
+/*GENERAL STUFF*/
+
+body {
+  background-color: #c5aa8c;
+}
+
+#main-container {
+  text-align: center;
+}
+
+/*WATSON COMPONENT*/
+
+.user-input {
+  width: 300px;
+  height: 350px;
+  resize: none;
+  font-size: 20px;
+  font-family: 'Lato', sans-serif;
+  background-color: #2a282b;
+  color: #82c3c7;
+}
+
+#watson-title {
+  font-size: 2em;
+  font-family: 'Inconsolata';
+  color: #015255; 
+}
+
+/*SPOTIFY COMPONENT*/
+
+#button-holder {
+  text-align: center;
+  height: 350px;
+  display: inline-block;
+}
+
+.watson-button {
+  background-color: #ebce7d;
+  border: 5px solid #2a282b;
+  border-radius: 15px;
+  box-shadow: 0 20px 20px -15px #040203;
+  color: #82c3c7;
+  display: block;
+  width: 200px;
+  height: 55px;
+  margin: 50px auto;
+  text-align: center;
+  font-size: 2em;
+  font-family: 'Inconsolata';
+  cursor: pointer;
+  transition: 2s;
+  margin-top: 1em;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.watson-button:hover {
+  transition: 1s;
+  border: 5px solid #82c3c7;
+  background-color: #2a282b;
+  color: #ebce7d;
+}
+
+#watson-description {
+  text-align: center;
+  font-family: 'Inconsolata';
+  font-size: 1em;
+}
+
+#spotify-player {
+  width: 100%;
+}
+
+/*FACT COMPONENT*/
+
+/*QUOTE COMPONENT*/
+
+/*GIF COMPONENT*/
 img {
   width: 400px;
   height: 250px;
+}
+
+
+
+@media (min-width: 700px) {
+  #spotify-player {
+    width: 25%;
+  }
+
+  .watson-button {
+    display: inline-block;
+    margin: 1em;
+  }
 }

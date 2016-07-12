@@ -12,6 +12,9 @@ var App = React.createClass({
       gif: undefined
     }
   },
+  resetWatsonState: function(){
+    this.setState({watson: undefined})
+  },
   setWatsonState: function (data){
     this.setState({watson: data})
   },
@@ -35,6 +38,7 @@ var App = React.createClass({
         setState = {this.setWatsonState}
         spotifyState = {this.state.spotify}
         setSpotifyState = {this.setSpotifyState}
+        reset = {this.resetWatsonState}
       />
       <Facts 
         factsState = {this.state.facts}
@@ -66,6 +70,7 @@ var Watson = React.createClass({
     });
   },
   watsonAjax: function(e){
+    this.setState({userText: undefined})
     e.preventDefault();
     var textData = {text: this.state.userText}
     console.log(textData)
@@ -81,20 +86,20 @@ var Watson = React.createClass({
   render: function(){
     if (this.props.watsonState == undefined){
       return (
-        <div>
+        <div id = "watson-container">
+          <h2 id = "watson-title"> music for your mood </h2>
           <form
             id="watson-form"
           onSubmit={this.watsonAjax}>
-          <input
-            type="textarea"
-            placeholder='how are you feeling today?'
+          <textarea
             value={this.state.userText}
             onChange={this.handleTextChange}
             className="user-input"
           />
+          <br />
           <button
             type='submit'
-            className='watson-input'
+            className='watson-button'
           >
             Submit
           </button>
@@ -107,6 +112,7 @@ var Watson = React.createClass({
           watsonState = {this.props.watsonState}
           spotifyState = {this.props.spotifyState}
           setState = {this.props.setSpotifyState}
+          reset = {this.props.reset}
         />
       )
     }
@@ -129,14 +135,18 @@ var Spotify = React.createClass({
   render: function(){
     if (this.props.spotifyState == undefined){
        return (
-      <div>
+      <div id = "button-holder">
+        <p id = "watson-description"> below is how you feel and the opposite of that! 
+        what kind of music would you like to hear? </p>
         <button
+        className = "watson-button"
         value = {this.props.watsonState.most}
         onClick = {this.spotifyAjax}
         >
           {this.props.watsonState.most}
         </button>
         <button
+          className = "watson-button"
           value = {this.props.watsonState.least}
           onClick = {this.spotifyAjax}
         >
@@ -148,17 +158,28 @@ var Spotify = React.createClass({
         <SpotifyPlayer 
           iframe = "iframe" 
           src = {this.props.spotifyState}
+          reset = {this.props.reset}
         />
      )}
     }
  })
 var SpotifyPlayer = React.createClass({
+  handleClick: function(){
+    this.props.reset();
+  },
   render: function(){
     console.log(this.props.src)
     var Iframe = this.props.iframe;
     return (
       <div>
-        <Iframe src={this.props.src} width = "300" height = "380" frameBorder = "0" allowTransparency = "0"/>
+        <Iframe id = "spotify-player" src={this.props.src} width = "300" height = "380" frameBorder = "0" allowTransparency = "0"/>
+        <br />
+        <button
+          className = "watson-button"
+          onClick = {this.handleClick}
+        >
+        try again?
+        </button>
       </div>
     )
   }

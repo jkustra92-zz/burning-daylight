@@ -43,9 +43,14 @@
 }
 
 .literally{
+  margin-top: 4.1em;
+  text-align: center;
   position:relative;
   background-color:#ddd;
-  min-height:400px;
+  min-height:500px;
+  width: 75%;
+  margin-left: 6em;
+  border: 3px solid black;
   -webkit-touch-callout:none;
   -webkit-user-select:none;
   -khtml-user-select:none;
@@ -152,18 +157,20 @@
   width:28px;
   height:28px;
   margin:1px auto;
-  overflow:visible}
+  overflow:visible;
+}
 
 .literally .color-well-color-container{
-  text-decoration:none;cursor:pointer
+  text-decoration:none;
+  cursor:pointer;
 }
 
 .literally .color-well-color-container.selected:not(.disabled){
-  background-color:#a1d9fe
+  background-color:#a1d9fe;
 }
 
 .literally .color-well-color-container:hover:not(.disabled){
-  border-color:#a1d9fe
+  border-color:#a1d9fe;
 }
 
 .literally .color-well-color-container.disabled{
@@ -171,7 +178,10 @@
 }
 
 .literally .color-well-color-container .color-well-checker{
-  position:absolute;width:50%;height:50%;background-color:black
+  position:absolute;
+  width:50%;
+  height:50%;
+  background-color:black;
 }
 
 .literally .color-well-color-container .color-well-checker-top-left{

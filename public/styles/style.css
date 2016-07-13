@@ -15,7 +15,7 @@ header {
 }
 
 body {
-  background-color: #c5aa8c;
+  background-color: #dddddb;
 }
 
 #main-container {
@@ -23,10 +23,40 @@ body {
 }
 
 @font-face {
-  font-family: 'fontello';
-  src: url('../fonts/fontello.ttf');
+  font-family: "fontello";
+  src: url("../fonts/fontello.ttf");
 }
 
+.back-button {
+  font-family: "fontello"
+}
+
+.menu-button {
+  font-family: "fontello";
+  background-color: #401002;
+  color: #89abad;
+  font-family: "fontello";
+  width: 75px;
+  height: 75px;
+  font-size: 2em;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid #c3a585;
+  transition: 1s;
+  box-shadow: 0 20px 20px -15px #040203;
+  margin-bottom: 1.2em;
+}
+
+.menu-button:first-of-type {
+  font-size: 1em;
+}
+
+.menu-button:hover {
+  background-color: #c3a585;
+  color: #401002;
+  border: 3px solid #89abad;
+  transition: 1s;
+}
 /*WATSON COMPONENT*/
 
 .user-input {
@@ -35,22 +65,25 @@ body {
   resize: none;
   font-size: 20px;
   font-family: 'Lato', sans-serif;
-  background-color: #2a282b;
-  color: #82c3c7;
+  background-color: #c3a585;
+  border: 5px solid #111728;
+  color: #401002;
+  border-radius: 10px;
+  box-shadow: 0 20px 20px -15px #040203;
 }
 
 #watson-title {
   font-size: 2em;
   font-family: 'Inconsolata';
-  color: #015255; 
+  color: #111728; 
 }
 
 .watson-button {
-  background-color: #ebce7d;
-  border: 5px solid #2a282b;
+  background-color: #111728;
+  border: 5px solid #c3a585;
   border-radius: 15px;
   box-shadow: 0 20px 20px -15px #040203;
-  color: #82c3c7;
+  color: #89abad;
   display: block;
   width: 300px;
   height: 75px;
@@ -67,9 +100,9 @@ body {
 
 .watson-button:hover {
   transition: 1s;
-  border: 5px solid #82c3c7;
-  background-color: #2a282b;
-  color: #ebce7d;
+  border: 5px solid #89abad;
+  background-color: #c3a585;
+  color: #111728;
 }
 
 /*SPOTIFY COMPONENT*/
@@ -83,7 +116,7 @@ body {
 
 #music-note {
   font-family: "fontello";
-  color: #015255;
+  color: #401002;
   font-size: 100px;
 }
 
@@ -104,47 +137,6 @@ body {
 
 /*FACT COMPONENT*/
 
-#catfact-container {
-  height: 20em;
-  text-align: center;
-  overflow: auto;
-  overflow-x: hidden; 
-  overflow-y: scroll;
-}
-
-#cat-title {
-  font-family: 'Shadows Into Light Two', cursive;
-  font-size: 4em;
-  color: #ff4c2d;
-  margin: 0;
-}
-
-#cat-button {
-  background-color: #82c3c7;
-  color: #c61800;
-  font-family: "fontello";
-  width: 75px;
-  height: 75px;
-  font-size: 2em;
-  border-radius: 50%;
-  cursor: pointer;
-  border: 2px solid #ebce7d;
-  transition: 1s;
-  box-shadow: 0 20px 20px -15px #040203;
-}
-
-#cat-button:hover {
-  background-color: #c61800;
-  color: #ebce7d;
-  border: 2px solid #82c3c7;
-  transition: 1s;
-}
-
-#catfact {
-  font-family: 'Lato', sans-serif;
-  color: #2a282b;
-  font-size: 1.5rem;
-}
 
 /*QUOTE COMPONENT*/
 
@@ -156,7 +148,7 @@ body {
 #quote-title {
   font-family: 'Great Vibes', cursive;
   font-size: 4.5em;
-  color: #ec4d49;
+  color: #111728;
   margin: 0;
 }
 
@@ -182,8 +174,8 @@ body {
 }
 
 #gif-title {
-  font-family: 'Fjalla One', sans-serif;
-  color: #6d016c;
+  font-family: 'Shadows Into Light Two', cursive;
+  color: #401002;
   font-size: 2.25em;
 }
 
@@ -194,6 +186,12 @@ body {
 img {
   width: 400px;
   height: 250px;
+}
+
+/*DRAWING COMPONENT*/
+
+#draw-title {
+  color: #c3a585;
 }
 
 @media (min-width: 700px) {
@@ -237,52 +235,6 @@ img {
 
   /*FACTS COMPONENT*/
 
-  #catfact-container {
-    height: 15em;
-    text-align: center;
-    overflow: auto;
-    overflow-x: hidden; 
-    overflow-y: scroll;
-  }
-
-  #cat-title {
-    font-family: 'Shadows Into Light Two', cursive;
-    font-size: 2.5em;
-    color: #ff4c2d;
-    margin: 0;
-  }
-
-  #cat-button {
-    background-color: #82c3c7;
-    color: #c61800;
-    font-family: "fontello";
-    width: 50px;
-    height: 50px;
-    font-size: 1em;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid #ebce7d;
-    transition: 1s;
-    box-shadow: 0 20px 20px -15px #040203;
-  }
-
-  #cat-button:hover {
-    background-color: #c61800;
-    color: #ebce7d;
-    border: 2px solid #82c3c7;
-    transition: 1s;
-  }
-
-  #catfact {
-    font-family: 'Lato', sans-serif;
-    color: #2a282b;
-    font-size: 1rem;
-    width: 50%;
-    text-align: center;
-    margin: 0 auto;
-    margin-top: 1em;
-  }
-
   /*QUOTES COMPONENT */
 
   #quote-container {
@@ -293,7 +245,7 @@ img {
   #quote-title {
     font-family: 'Great Vibes', cursive;
     font-size: 4em;
-    color: #ec4d49;
+    color: #111728;
     margin: 0;
   }
 
@@ -323,8 +275,8 @@ img {
   }
 
   #gif-title {
-    font-family: 'Fjalla One', sans-serif;
-    color: #6d016c;
+    font-family: 'Shadows Into Light Two', cursive;
+    color: #401002;
     font-size: 2em;
   }
 }

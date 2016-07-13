@@ -67,7 +67,7 @@ var App = React.createClass({
          </div>
       </div>)
     }else if (this.state.gif != undefined){
-          return(<div id = "big-container">
+      return(<div id = "big-container">
         <div id = "container-left">   
           <Watson 
             watsonState = {this.state.watson} 
@@ -77,16 +77,30 @@ var App = React.createClass({
             reset = {this.resetWatsonState}
           />
           </div>
-          <div id = "container-right"> 
-            <Gifs 
-              gifState = {this.state.gif}
+          <div id = "container-right">
+            <Gifs
               getGif = {this.setGiphyState}
+              gifState = {this.state.gif}
               reset = {this.resetOtherStates}
-            />
+              />
+         </div>
+      </div>) 
+    }else if (this.state.drawing != undefined){
+      return(<div id = "big-container">
+        <div id = "container-left">   
+          <Watson 
+            watsonState = {this.state.watson} 
+            setState = {this.setWatsonState}
+            spotifyState = {this.state.spotify}
+            setSpotifyState = {this.setSpotifyState}
+            reset = {this.resetWatsonState}
+          />
+          </div>
+          <div id = "container-right">
+            <BackButton reset = {this.resetOtherStates} /> 
+            <LC.LiterallyCanvasReactComponent imageURLPrefix="../img" />
          </div>
       </div>)
-    }else if (this.state.drawing != undefined){
-      // drawing component or whatever goes here. get from library.
     }else{
       return(<div id = "big-container">
         <div id = "container-left">   
@@ -110,6 +124,18 @@ var App = React.createClass({
   }
 });
 
+var BackButton = React.createClass({
+  render: function(){
+    return(<button
+      onClick = {this.props.reset}
+      className = "back-button"
+    >
+      E
+    </button>)
+    
+  }
+})
+
 var Menu = React.createClass({
   getInitialState: function(){
     return ({clicked: false})
@@ -117,22 +143,31 @@ var Menu = React.createClass({
   render: function(){
     return(
       <div>
+        <h2 id = "quote-title"> become inspired</h2>
+        <br />
         <button
+          className = "menu-button"
           onClick = {this.props.selectQuote}
         >
-          quotes
+          B C
         </button>
         <br />
+        <h2 id = "gif-title">emergency animal gifs!</h2>
+        <br />
         <button 
+          className = "menu-button"
           onClick = {this.props.selectGif}
         >
-          gifs
+          A
         </button>
         <br />
+        <h2 id = "draw-title"> some artsy shit </h2>
+        <br />
         <button 
+          className = "menu-button"
           onClick = {this.props.selectDraw}
         >
-          drawing
+          F
         </button>
       </div>
   )}
@@ -277,10 +312,11 @@ var Quotes = React.createClass({
       <div id = "quote-container">
         <button
             onClick = {this.props.reset}
+            className = "back-button"
         >
-          go back!
+          E
         </button>
-        <h2 id = "quote-title"> become inspired</h2>
+        <br />
         <button
           id = "quote-button"
           onClick = {this.props.getQuote}
@@ -301,15 +337,16 @@ var Gifs = React.createClass({
       <div id = "gif-container">
         <button
             onClick = {this.props.reset}
+            className = "back-button"
         >
-          go back!
+          E
         </button>
-        <h2 id = "gif-title">emergency animal gifs!</h2>
+        <br />
         <button
           id = "gif-button"
           onClick = {this.props.getGif}
           > 
-          E
+          A
         </button>
         <br />
         <img src = {gif.data.image_url} />

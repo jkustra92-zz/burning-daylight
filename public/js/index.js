@@ -1,19 +1,21 @@
 console.log("hello, friend. hello, friend? that's lame.");
 //have to start every app off with this mr. robot reference. it's just my thing.
 
-
 var App = React.createClass({
   getInitialState: function(){
     return {
       watson: undefined,
       spotify: undefined,
-      facts: undefined,
       quotes: undefined,
+      drawing: undefined,
       gif: undefined
     }
   },
   resetWatsonState: function(){
     this.setState({watson: undefined, spotify: undefined})
+  },
+  resetOtherStates: function(){
+    this.setState({quotes: undefined, drawing: undefined, gif: undefined})
   },
   setWatsonState: function (data){
     this.setState({watson: data})
@@ -21,42 +23,120 @@ var App = React.createClass({
   setSpotifyState: function(data){
     this.setState({spotify: data})
   },
-  setFactsState: function(data){
-    this.setState({facts: data})
+  setDrawState: function(data){
+    this.setState({drawing: true})
   },
   setQuotesState: function(data){
-    this.setState({quotes: data})
+    $.ajax({
+      url: "/quotes",
+      method: "GET",
+      success: function(data){
+        console.log(data);
+        this.setState({quotes: data})
+      }.bind(this)
+    })
   },
   setGiphyState: function(data){
-    this.setState({gif: data})
+      $.ajax({
+      url: "/giphy",
+      method: "GET",
+      success: function(data){
+        console.log(data)
+        this.setState({gif: data})
+      }.bind(this)
+    })
+  },
+  render: function(){
+    if (this.state.quotes != undefined){
+      return(<div id = "big-container">
+        <div id = "container-left">   
+          <Watson 
+            watsonState = {this.state.watson} 
+            setState = {this.setWatsonState}
+            spotifyState = {this.state.spotify}
+            setSpotifyState = {this.setSpotifyState}
+            reset = {this.resetWatsonState}
+          />
+          </div>
+          <div id = "container-right"> 
+            <Quotes 
+              getQuote = {this.setQuotesState}
+              quotesState = {this.state.quotes}
+              reset = {this.resetOtherStates}
+            />
+         </div>
+      </div>)
+    }else if (this.state.gif != undefined){
+          return(<div id = "big-container">
+        <div id = "container-left">   
+          <Watson 
+            watsonState = {this.state.watson} 
+            setState = {this.setWatsonState}
+            spotifyState = {this.state.spotify}
+            setSpotifyState = {this.setSpotifyState}
+            reset = {this.resetWatsonState}
+          />
+          </div>
+          <div id = "container-right"> 
+            <Gifs 
+              gifState = {this.state.gif}
+              getGif = {this.setGiphyState}
+              reset = {this.resetOtherStates}
+            />
+         </div>
+      </div>)
+    }else if (this.state.drawing != undefined){
+      // drawing component or whatever goes here. get from library.
+    }else{
+      return(<div id = "big-container">
+        <div id = "container-left">   
+          <Watson 
+            watsonState = {this.state.watson} 
+            setState = {this.setWatsonState}
+            spotifyState = {this.state.spotify}
+            setSpotifyState = {this.setSpotifyState}
+            reset = {this.resetWatsonState}
+          />
+          </div>
+          <div id = "container-right"> 
+            <Menu 
+              selectQuote = {this.setQuotesState}
+              selectGif = {this.setGiphyState}
+              selectDraw = {this.setDrawState}
+            />
+         </div>
+      </div>)  
+    }
+  }
+});
+
+var Menu = React.createClass({
+  getInitialState: function(){
+    return ({clicked: false})
   },
   render: function(){
     return(
-    <div id = "big-container">
-      <div id = "container-left">   
-      <Watson 
-        watsonState = {this.state.watson} 
-        setState = {this.setWatsonState}
-        spotifyState = {this.state.spotify}
-        setSpotifyState = {this.setSpotifyState}
-        reset = {this.resetWatsonState}
-      />
+      <div>
+        <button
+          onClick = {this.props.selectQuote}
+        >
+          quotes
+        </button>
+        <br />
+        <button 
+          onClick = {this.props.selectGif}
+        >
+          gifs
+        </button>
+        <br />
+        <button 
+          onClick = {this.props.selectDraw}
+        >
+          drawing
+        </button>
       </div>
-
-      <div id = "container-right"> 
-        <Quotes 
-          quotesState = {this.state.quotes}
-          setState = {this.setQuotesState}
-        />
-        <Gifs 
-          gifState = {this.state.gif}
-          setState = {this.setGiphyState}
-        /> 
-     </div>
-    </div>
-    )
-  }
-});
+  )}
+})
 
 var Watson = React.createClass({
   getInitialState: function(){
@@ -188,117 +268,54 @@ var SpotifyPlayer = React.createClass({
       </div>
     )
   }
-})
-
-
-var Facts = React.createClass({
-  componentDidMount: function(){
-    this.getFact()
-  },
-  getFact: function(){
-    $.ajax({
-      url: "/facts",
-      method: "GET",
-      success: function(data){
-        // console.log(data);
-        // console.log(this.props.setState);
-        // console.log(this.props.factsState);
-        this.props.setState(data)
-      }.bind(this)
-    })
-  },
-  render: function(){
-    var catFact = this.props.factsState;
-    if (this.props.factsState == undefined){
-      return (<div><p>ya ain't got no cat facts</p></div>)
-    }else{
-      return (
-      <div id = "catfact-container">
-      <h2 id = "cat-title"> cat facts! </h2>
-      <button
-        id = "cat-button"
-        onClick = {this.getFact}
-      > 
-        A
-      </button>
-      <p id = "catfact">{catFact}</p>
-      </div>)
-    }
-  }
-})
+}) 
 
 var Quotes = React.createClass({
-  componentDidMount: function(){
-    this.getQuote()
-  },
-  getQuote: function(){
-    $.ajax({
-      url: "/quotes",
-      method: "GET",
-      success: function(data){
-        // console.log(data);
-        // console.log(this.props.setState);
-        // console.log(this.props.factsState);
-        this.props.setState(data)
-      }.bind(this)
-    })
-  },
   render: function(){
-    var quote = this.props.quoteState;
-    
-    if (this.props.quotesState == undefined){
-      return (<div><p>not inspirational af. boo.</p></div>)
-    }else{
-      quote = this.props.quotesState;
+    var quote = this.props.quotesState;
       return (
       <div id = "quote-container">
+        <button
+            onClick = {this.props.reset}
+        >
+          go back!
+        </button>
         <h2 id = "quote-title"> become inspired</h2>
         <button
           id = "quote-button"
-          onClick = {this.getQuote}
+          onClick = {this.props.getQuote}
         > 
           B C
         </button>
         <p id = "quote-text">"{quote.text}"</p>
         <p id = "quote-author">-{quote.author}</p>
-      </div>)
+      </div>
+      )
     }
-  }
 });
 
 var Gifs = React.createClass({
-  componentDidMount: function(){
-    this.getGif()
-  },
-  getGif: function(){
-    $.ajax({
-      url: "/giphy",
-      method: "GET",
-      success: function(data){
-        this.props.setState(data)
-      }.bind(this)
-    })
-  },
   render: function(){
-    if (this.props.gifState == undefined) {
-      return(<div><p>no gifs. none.</p></div>)
-    }else{
-      var gif = this.props.gifState;
-      return (
+    var gif = this.props.gifState;
+    return (
       <div id = "gif-container">
-      <h2 id = "gif-title">emergency animal gifs!</h2>
-      <button
-        id = "gif-button"
-        onClick = {this.getGif}
-        > 
-        E
-      </button>
-      <br />
-      <img src = {gif.data.image_url} />
-      <br />
-      
-      </div>)
-    }
+        <button
+            onClick = {this.props.reset}
+        >
+          go back!
+        </button>
+        <h2 id = "gif-title">emergency animal gifs!</h2>
+        <button
+          id = "gif-button"
+          onClick = {this.props.getGif}
+          > 
+          E
+        </button>
+        <br />
+        <img src = {gif.data.image_url} />
+        <br />
+      </div>
+    )
   }
 })
 

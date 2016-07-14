@@ -348,7 +348,7 @@ var Gifs = React.createClass({
           id = "gif-button"
           onClick = {this.props.getGif}
           > 
-          G
+          A
         </button>
       </div>
     )

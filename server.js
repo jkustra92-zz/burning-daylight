@@ -8,7 +8,7 @@ var logger = require("morgan");
 var methodOverride = require("method-override");
 var bodyParser = require("body-parser");
 var port = process.env.PORT || 3000;
-
+var ngrok = require("ngrok");
 //============
 // middleware
 //============
@@ -57,3 +57,15 @@ app.listen(port);
 console.log("=======")
 console.log("(⊙︿⊙✿)");
 console.log("=======")
+
+//=============
+// ngrok stuff
+//=============
+
+ngrok.connect({
+  proto: "http",
+  add: port,
+  // auth: "user:pwd",
+  region: "us",
+}, function (err, url){
+});

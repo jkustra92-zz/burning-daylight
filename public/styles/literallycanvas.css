@@ -48,8 +48,7 @@
   position:relative;
   background-color:#ddd;
   min-height:500px;
-  width: 75%;
-  margin-left: 6em;
+  width: 100%;
   border: 5px solid #401002;
   border-radius: 10px;
   -webkit-touch-callout:none;
@@ -317,4 +316,25 @@
 
 .literally .lc-options .lc-font-settings input[type=checkbox]{
   margin:0 0.5em 0 0.5em
+}
+
+@media (min-width: 700px) {
+  .literally{
+    margin-top: 0.25em;
+    text-align: center;
+    position:relative;
+    background-color:#ddd;
+    min-height:500px;
+    width: 75%;
+    margin-left: 6em;
+    border: 5px solid #401002;
+    border-radius: 10px;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    -ms-touch-action:none;
+    user-select:none
+  }
 }

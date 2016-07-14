@@ -292,7 +292,7 @@ var SpotifyPlayer = React.createClass({
     return (
       <div id = "spotify-component">
         <h2 id = "watson-title"> music for your mood </h2>
-        <Iframe id = "spotify-player" src={this.props.src} width = "300" height = "380" frameBorder = "0" allowTransparency = "0"/>
+        <Iframe id = "spotify-player" src={this.props.src} width = "300" height = "375" frameBorder = "0" allowTransparency = "0"/>
         <br />
         <button
           className = "watson-button"

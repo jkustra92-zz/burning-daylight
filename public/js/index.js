@@ -161,7 +161,7 @@ var Menu = React.createClass({
           A
         </button>
         <br />
-        <h2 id = "draw-title"> some artsy shit </h2>
+        <h2 id = "draw-title"> get creative </h2>
         <br />
         <button 
           className = "menu-button"
@@ -342,15 +342,14 @@ var Gifs = React.createClass({
           E
         </button>
         <br />
+        <img src = {gif.data.image_url} />
+        <br /> 
         <button
           id = "gif-button"
           onClick = {this.props.getGif}
           > 
           A
         </button>
-        <br />
-        <img src = {gif.data.image_url} />
-        <br />
       </div>
     )
   }

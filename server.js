@@ -37,9 +37,6 @@ app.use("/music", musicController);
 var quotesController = require("./controllers/quotes.js")
 app.use("/quotes", quotesController);
 
-var factsController = require("./controllers/facts.js")
-app.use("/facts", factsController);
-
 var giphyController = require("./controllers/giphy.js")
 app.use("/giphy", giphyController);
 

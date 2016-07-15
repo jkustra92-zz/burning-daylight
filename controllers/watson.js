@@ -4,6 +4,12 @@
 var express = require("express");
 // var watson = require('watson-developer-cloud');
 router = express.Router();
+var RateLimit = require('express-rate-limit');
+var createWatsonLimiter = new RateLimit({
+  windowMs: 60*60*1000, // 1 hour window 
+  max: 1, // start blocking after 5 requests 
+  message: "nooope"
+});
 
 //tone analyzer data goes here when i eventually deploy this
 

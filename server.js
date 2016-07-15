@@ -23,6 +23,7 @@ app.use(methodOverride(function(req, res){
     return method;
   }
 }));
+app.enable('trust proxy');
 
 //=============
 // controllers

@@ -118,6 +118,10 @@ body {
   box-shadow: 0 20px 20px -15px #040203;
 }
 
+::-webkit-input-placeholder {
+    color: black;
+}
+
 #watson-title {
   font-size: 2em;
   font-family: 'Inconsolata';

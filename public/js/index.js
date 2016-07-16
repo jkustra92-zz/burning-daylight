@@ -208,6 +208,7 @@ var Watson = React.createClass({
             id="watson-form"
           onSubmit={this.watsonAjax}>
           <textarea
+            placeholder = "type your thoughts here!"
             value={this.state.userText}
             onChange={this.handleTextChange}
             className="user-input"

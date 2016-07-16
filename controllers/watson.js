@@ -4,6 +4,10 @@
 var express = require("express");
 var watson = require('watson-developer-cloud');
 router = express.Router();
+
+//=============
+// watson keys
+//=============
 var username = process.env.WATSON_USERNAME
 var password = process.env.WATSON_PASSWORD
 

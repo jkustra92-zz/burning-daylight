@@ -2,7 +2,7 @@ console.log("hello, friend. hello, friend? that's lame.");
 //have to start every app off with this mr. robot reference. it's just my thing.
 
 var App = React.createClass({
-  getInitialState: function(){
+  getInitialState: function(){                      //so as of now, nothing in my app has state. they are stateless components, hiding behind buttons.
     return {
       watson: undefined,
       spotify: undefined,
@@ -12,10 +12,10 @@ var App = React.createClass({
     }
   },
   resetWatsonState: function(){
-    this.setState({watson: undefined, spotify: undefined})
+    this.setState({watson: undefined, spotify: undefined})        //eventually, to let the watson component have resuability, both it and spotify need to reset.
   },
   resetOtherStates: function(){
-    this.setState({quotes: undefined, drawing: undefined, gif: undefined})
+    this.setState({quotes: undefined, drawing: undefined, gif: undefined})    //this helps with the buttons on the menu. when the back button is clicked, reset ALL of the states.
   },
   setWatsonState: function (data){
     this.setState({watson: data})
@@ -26,8 +26,8 @@ var App = React.createClass({
   setDrawState: function(data){
     this.setState({drawing: true})
   },
-  setQuotesState: function(data){
-    $.ajax({
+  setQuotesState: function(data){                                       //did something different here compared to my other react app. have all my states and api calls in the main component
+    $.ajax({                                                            //and passing them down as they're needed. that seemed like such a strange concept to me at first, but i get it now.
       url: "/quotes",
       method: "GET",
       success: function(data){
@@ -46,8 +46,8 @@ var App = React.createClass({
       }.bind(this)
     })
   },
-  render: function(){
-    if (this.state.quotes != undefined){
+  render: function(){                                                     //so this is my way of creating toggle functionality. only show the one that currently has state. there was a different
+    if (this.state.quotes != undefined){                                  //way of going about this, but when i decided to implement this feature, i would have had to refactor the whole app. so no.
       return(<div id = "big-container">
         <div id = "container-left">   
           <Watson 
@@ -85,8 +85,8 @@ var App = React.createClass({
               />
          </div>
       </div>) 
-    }else if (this.state.drawing != undefined){
-      return(<div id = "big-container">
+    }else if (this.state.drawing != undefined){                               //so when the drawing button is clicked, it sets the state to true (which i mean is TECHNICALLY not undefined) and that renders A R T.
+      return(<div id = "big-container">                                      
         <div id = "container-left">   
           <Watson 
             watsonState = {this.state.watson} 
@@ -98,10 +98,10 @@ var App = React.createClass({
           </div>
           <div id = "container-right">
             <BackButton reset = {this.resetOtherStates} /> 
-            <LC.LiterallyCanvasReactComponent imageURLPrefix="../img" />
+            <LC.LiterallyCanvasReactComponent imageURLPrefix="../img" />       
          </div>
       </div>)
-    }else{
+    }else{                                                                      //so then if none of them have state, show the menu off to the right. the watson container is a constant.
       return(<div id = "big-container">
         <div id = "container-left">   
           <Watson 
@@ -124,7 +124,7 @@ var App = React.createClass({
   }
 });
 
-var BackButton = React.createClass({
+var BackButton = React.createClass({                                                  //this awesome little component resets the states of the three menu items, so the user can go back.
   render: function(){
     return(<button
       onClick = {this.props.reset}
@@ -136,7 +136,7 @@ var BackButton = React.createClass({
   }
 })
 
-var Menu = React.createClass({
+var Menu = React.createClass({                                                        //the menu!! it has buttons with onClick listeners attached that make ajax calls to their respective topics
   getInitialState: function(){
     return ({clicked: false})
   },
@@ -173,7 +173,7 @@ var Menu = React.createClass({
   )}
 })
 
-var Watson = React.createClass({
+var Watson = React.createClass({                                                      //this is the only other component that has state (honestly, this could have been thrown up with the rest of them too. but eh.)
   getInitialState: function(){
     return{
       userText: undefined
@@ -185,7 +185,7 @@ var Watson = React.createClass({
       userText: e.target.value
     });
   },
-  watsonAjax: function(e){
+  watsonAjax: function(e){                                                              //sends an ajax call to the watson server route (which later connects to API) with the user's input as the data to be analyzed.
     this.setState({userText: undefined})
     e.preventDefault();
     var textData = {text: this.state.userText}
@@ -200,7 +200,7 @@ var Watson = React.createClass({
     })
   },
   render: function(){
-    if (this.props.watsonState == undefined){
+    if (this.props.watsonState == undefined){                                             //if watson's state is undefined, then render the form and submit button, buuuuut....
       return (
         <div id = "watson-container">
           <h2 id = "watson-title"> music for your mood </h2>
@@ -223,7 +223,7 @@ var Watson = React.createClass({
         </form> 
       </div>
       )
-    }else{
+    }else{                                                                          //if watson DOES have state, render the spotify component and all the cool stuff that comes with it!
       return(
         <Spotify
           watsonState = {this.props.watsonState}
@@ -250,7 +250,7 @@ var Spotify = React.createClass({
     })
   },
   render: function(){
-    if (this.props.spotifyState == undefined){
+    if (this.props.spotifyState == undefined){                                          //so this will take the result of the API request (watson's state) and render buttons with the highest and lowest emotions.
        return (
       <div id = "button-holder">
         <h2 id = "watson-title"> music for your mood </h2>
@@ -258,7 +258,7 @@ var Spotify = React.createClass({
         what kind of music would you like to hear? </p>
         <button
         className = "watson-button"
-        value = {this.props.watsonState.most}
+        value = {this.props.watsonState.most}                                           //whatever button a user clicks on will send an ajax call to the spotify route/API and get a playlist based on that value
         onClick = {this.spotifyAjax}
         >
           {this.props.watsonState.most}
@@ -274,7 +274,7 @@ var Spotify = React.createClass({
         <span id = "music-note">D</span>
       </div>)
      }else{
-      return( 
+      return(                                                                             //after the API call is made, Spotify component now has state and can render this cool embedded player!! :D
         <SpotifyPlayer 
           iframe = "iframe" 
           src = {this.props.spotifyState}
@@ -283,7 +283,7 @@ var Spotify = React.createClass({
      )}
     }
  })
-var SpotifyPlayer = React.createClass({
+var SpotifyPlayer = React.createClass({                                                   //this being the cool embedded player.
   handleClick: function(){
     this.props.reset();
   },
@@ -296,7 +296,7 @@ var SpotifyPlayer = React.createClass({
         <Iframe id = "spotify-player" src={this.props.src} width = "300" height = "375" frameBorder = "0" allowTransparency = "0"/>
         <br />
         <button
-          className = "watson-button"
+          className = "watson-button"                                                       //the handy dandy "try again" buttons gives the app more reusability (so if you think your playlist result sucks, fear not! second chances and all that.)
           onClick = {this.handleClick}
         >
         try again?
@@ -305,8 +305,8 @@ var SpotifyPlayer = React.createClass({
     )
   }
 }) 
-
-var Quotes = React.createClass({
+                                                                                            // these last two components are pretty similar in structure, so i'll just say it all here. they have render functions with show the back button, the data returned
+var Quotes = React.createClass({                                                            // from an ajax request, and a button that lets the user keep making ajax requests to get new content to render in the component. weeeeeeeeeee.
   render: function(){
     var quote = this.props.quotesState;
       return (

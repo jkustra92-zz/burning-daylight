@@ -4,7 +4,7 @@
 var express = require("express");
 router = express.Router();
 var request = require("request")
-var parseString = require('xml2js').parseString;
+var parseString = require('xml2js').parseString;                    //the response was in xml so i needed a way to convert it to json
 
 
 router.get("/", function(req, res){
@@ -16,8 +16,8 @@ router.get("/", function(req, res){
     var xml = body
       parseString(xml, function (err, result) {
       var text = result.forismatic.quote[0].quoteText[0]
-      var author = result.forismatic.quote[0].quoteAuthor[0]
-      var quote = {
+      var author = result.forismatic.quote[0].quoteAuthor[0]          
+      var quote = {                                             //made my own object with the data i needed cause, no offense to forismatic, your naming conventions are ... strange.
         "text": text,
         "author": author
       }

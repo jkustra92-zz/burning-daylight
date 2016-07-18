@@ -17,8 +17,8 @@ var password = process.env.WATSON_PASSWORD
 
 var RateLimit = require('express-rate-limit');
 var createWatsonLimiter = new RateLimit({
-  windowMs: 60*60*1000, // 1 hour window 
-  max: 1, // start blocking after 5 requests 
+  windowMs: 60*60*1000,                               // 1 hour window 
+  max: 1,                                             // start blocking after 1 request. i'm hella srs about this.
   message: "nooope"
 });
 
@@ -43,7 +43,7 @@ router.get("/", createWatsonLimiter, function(req, res){
     else {
       var feelings = response.document_tone.tone_categories[0].tones
       // console.log(feelings)
-      feelings.sort(function(obj1, obj2){
+      feelings.sort(function(obj1, obj2){                 //so each emotion had a score associated with it. wanted to get the highest and the lowest scores
         return obj2.score - obj1.score
       })
 
@@ -52,8 +52,8 @@ router.get("/", createWatsonLimiter, function(req, res){
       // console.log(feelings[4].tone_name)
       var emotion = feelings[0].tone_name
       var data;
-      switch(emotion){
-        case "Anger":
+      switch(emotion){                                    //BUT THEN! i realized that the default Watson responses were horrible for spotify playlists, so i went
+        case "Anger":                                     //to another mood playlisty type site and got some inspiration from what worked for them. it's ~research~
           data = {
             most: "anger",
             least: "motivation"
@@ -91,15 +91,15 @@ router.get("/", createWatsonLimiter, function(req, res){
           }
         }
         
-      res.send(data)
+      res.send(data)                                            //send back da data.
     }
   });
 })
 
 //===========
-// mock data
-//===========
-
+// mock data                                                    //this was so helpful for testing like you don't even know. and it was nice bc when i
+//===========                                                   //finally hooked up Watson, everything worked perfectly and i didn't have to send a million api calls
+                                                                //note to self: ALWAYS mock the data. so helpful.
 
 // response = {
 //   "document_tone": {

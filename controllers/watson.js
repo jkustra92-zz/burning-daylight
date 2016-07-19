@@ -11,6 +11,16 @@ router = express.Router();
 var username = process.env.WATSON_USERNAME
 var password = process.env.WATSON_PASSWORD
 
+//==================
+// request throttle
+//==================
+
+var RateLimit = require('express-rate-limit');
+var createWatsonLimiter = new RateLimit({
+  windowMs: 60*60*1000,                               // 1 hour window 
+  max: 1,                                             // start blocking after 1 request. i'm hella srs about this.
+  message: "nooope"
+});
 
 var tone_analyzer = watson.tone_analyzer({
   username: username,                              //gotta hide dem keys
@@ -19,7 +29,7 @@ var tone_analyzer = watson.tone_analyzer({
   version_date: '2016-05-19'
 });
 
-router.get("/", function(req, res){
+router.get("/", createWatsonLimiter, function(req, res){
   console.log(req.query.text)
   console.log("=============================")
   console.log("this IS an actual API call")
